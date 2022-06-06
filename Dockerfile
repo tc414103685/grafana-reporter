@@ -9,11 +9,11 @@ RUN make build
 FROM alpine:3.12
 COPY util/texlive.profile /
 
-RUN PACKAGES="wget perl-switch" \
+RUN PACKAGES="wget perl-switch fontconfig fontconfig-dev" \
         && apk update \
         && apk add $PACKAGES \
-        && apk add ca-certificates \
-        && wget -qO- \
+        && apk add ca-certificates
+RUN wget -qO- \
           "https://github.com/yihui/tinytex/raw/main/tools/install-unx.sh" | \
           sh -s - --admin --no-path \
         && mv ~/.TinyTeX /opt/TinyTeX \
